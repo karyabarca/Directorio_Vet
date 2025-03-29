@@ -1,0 +1,8 @@
+<h1>{{ veterinaria.nombre }}</h1>
+<p>Dirección: {{ veterinaria.direccion }}</p>
+<p>Teléfono: {{ veterinaria.telefono }}</p>
+<p>Email: {{ veterinaria.email }}</p>
+<p>Horario: {{ veterinaria.horario }}</p>
+<a href="{% url 'editar_veterinaria' veterinaria.pk %}">Editar</a>
+<a href="{% url 'eliminar_veterinaria' veterinaria.pk %}">Eliminar</a>
+<a href="{% url 'lista_veterinarias' %}">Volver</a>

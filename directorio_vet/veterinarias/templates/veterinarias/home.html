@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>xxxx de Veterinarias</title>
+</head>
+<body>
+    <h1>xxxx al Directorio de Veterinarias</h1>
+
+    <h2>Listado de Veterinarias</h2>
+    <ul>
+        {% for vet in veterinarias %}
+            <li><strong>{{ vet.nombre }}</strong> - {{ vet.direccion }} -  {{ vet.telefono }}</li>
+        {% empty %}
+            <li>No hay veterinarias registradas aún.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

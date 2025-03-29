@@ -1,0 +1,7 @@
+<h1>Veterinarias</h1>
+<a href="{% url 'crear_veterinaria' %}">Agregar Veterinaria</a>
+<ul>
+    {% for veterinaria in veterinarias %}
+        <li><a href="{% url 'detalle_veterinaria' veterinaria.pk %}">{{ veterinaria.nombre }}</a></li>
+    {% endfor %}
+</ul>
