@@ -1,6 +1,26 @@
-<h1>¿Eliminar "{{ veterinaria.nombre }}"?</h1>
-<form method="post">
-    {% csrf_token %}
-    <button type="submit">Sí, eliminar</button>
-</form>
-<a href="{% url 'lista_veterinarias' %}">Cancelar</a>
+{% extends 'veterinarias/base.html' %}
+
+{% block title %}Eliminar Veterinaria{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card border-danger shadow p-4">
+                <h3 class="text-center text-danger">¿Estás seguro de eliminar esta veterinaria?</h3>
+                <p class="text-center my-3">
+                    <strong>{{ veterinaria.nombre }}</strong><br>
+                    {{ veterinaria.direccion }}<br>
+                    {{ veterinaria.telefono }}
+                </p>
+                
+                <form method="POST" class="d-flex justify-content-between mt-4">
+                    {% csrf_token %}
+                    <a href="{% url 'lista_veterinarias' %}" class="btn btn-secondary">Cancelar</a>
+                    <button type="submit" class="btn btn-danger">Sí, eliminar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,7 +1,32 @@
-<h1>Veterinarias</h1>
-<a href="{% url 'crear_veterinaria' %}">Agregar Veterinaria</a>
-<ul>
-    {% for veterinaria in veterinarias %}
-        <li><a href="{% url 'detalle_veterinaria' veterinaria.pk %}">{{ veterinaria.nombre }}</a></li>
-    {% endfor %}
-</ul>
+{% extends 'veterinarias/base.html' %}
+
+{% block title %}Listado de Veterinarias{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4 text-center">Listado de Veterinarias</h2>
+
+    {% if veterinarias %}
+        <div class="row g-4">
+            {% for vet in veterinarias %}
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ vet.nombre }}</h5>
+                            <p class="card-text">
+                                📍 {{ vet.direccion }}<br>
+                                📞 {{ vet.telefono }}
+                            </p>
+                            <a href="{% url 'detalle_veterinaria' vet.pk %}" class="btn btn-outline-primary btn-sm">Ver detalles</a>
+                            <a href="{% url 'editar_veterinaria' vet.pk %}" class="btn btn-outline-warning btn-sm">Editar</a>
+                            <a href="{% url 'eliminar_veterinaria' vet.pk %}" class="btn btn-outline-danger btn-sm">Eliminar</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="text-center">No hay veterinarias registradas aún.</p>
+    {% endif %}
+</div>
+{% endblock %}

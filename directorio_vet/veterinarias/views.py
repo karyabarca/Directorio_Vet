@@ -4,7 +4,7 @@ from .forms import VeterinariaForm  # Crearemos este formulario más adelante
 
 def home(request):
     veterinarias = Veterinaria.objects.all()  # Obtiene todas las veterinarias
-    return render(request, 'home.html', {'veterinarias': veterinarias})
+    return render(request, 'veterinarias/home.html', {'veterinarias': veterinarias})
 
 def lista_veterinarias(request):
     veterinarias = Veterinaria.objects.all()

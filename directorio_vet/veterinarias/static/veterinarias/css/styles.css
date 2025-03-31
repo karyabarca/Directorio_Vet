@@ -1,0 +1,97 @@
+.inicio {
+    background-color: #ffffff;
+    padding: 40px;
+    text-align: center;
+}
+
+.inicio h2 {
+    color: #1a4d8f;
+    margin-bottom: 10px;
+}
+
+.inicio p {
+    font-size: 1.2rem;
+    color: #444;
+    margin-bottom: 20px;
+}
+
+.btn-ver-listado {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #1a4d8f;
+    margin-top: 10px;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-ver-listado:hover {
+    background-color: #163a6d;
+}
+
+
+.custom-navbar {
+    background-color: #071b35; /* Azul oscuro */
+}
+
+.navbar .nav-link:hover {
+    text-decoration: underline;
+}
+
+/* lista.html */
+.card {
+    border-radius: 10px;
+    transition: transform 0.2s ease;
+}
+
+.card:hover {
+    transform: scale(1.02);
+}
+
+.card-title {
+    color: #1a4d8f;
+}
+
+/* detalle.html */
+
+.card-title {
+    font-size: 1.6rem;
+    font-weight: 600;
+}
+
+.card-body p {
+    font-size: 1rem;
+    margin-bottom: 0.6rem;
+}
+
+/* formulario.html */
+
+form input,
+form textarea,
+form select {
+    width: 100%;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+form input:focus,
+form textarea:focus {
+    border-color: #1a4d8f;
+    box-shadow: 0 0 4px #1a4d8f40;
+    outline: none;
+}
+
+/* confirmar_eliminar.html */
+.card.border-danger {
+    border-width: 2px;
+}
+
+.card.border-danger h3 {
+    font-weight: bold;
+}
+
+.card p {
+    font-size: 1.1rem;
+}

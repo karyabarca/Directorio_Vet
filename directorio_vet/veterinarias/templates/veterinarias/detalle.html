@@ -1,8 +1,25 @@
-<h1>{{ veterinaria.nombre }}</h1>
-<p>Dirección: {{ veterinaria.direccion }}</p>
-<p>Teléfono: {{ veterinaria.telefono }}</p>
-<p>Email: {{ veterinaria.email }}</p>
-<p>Horario: {{ veterinaria.horario }}</p>
-<a href="{% url 'editar_veterinaria' veterinaria.pk %}">Editar</a>
-<a href="{% url 'eliminar_veterinaria' veterinaria.pk %}">Eliminar</a>
-<a href="{% url 'lista_veterinarias' %}">Volver</a>
+{% extends 'veterinarias/base.html' %}
+
+{% block title %}{{ veterinaria.nombre }} | Detalles{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card shadow-lg mx-auto" style="max-width: 600px;">
+        <div class="card-body">
+            <h3 class="card-title text-center text-primary">{{ veterinaria.nombre }}</h3>
+            <hr>
+            <p><strong>📍 Dirección:</strong> {{ veterinaria.direccion }}</p>
+            <p><strong>📞 Teléfono:</strong> {{ veterinaria.telefono }}</p>
+            <p><strong>📧 Correo:</strong> {{ veterinaria.email }}</p>
+            <p><strong>⏰ Horario:</strong> {{ veterinaria.horario }}</p>
+            <p><strong>🩺 Servicios:</strong> {{ veterinaria.servicios }}</p>
+
+            <div class="mt-4 d-flex justify-content-between">
+                <a href="{% url 'editar_veterinaria' veterinaria.pk %}" class="btn btn-warning">Editar</a>
+                <a href="{% url 'eliminar_veterinaria' veterinaria.pk %}" class="btn btn-danger">Eliminar</a>
+                <a href="{% url 'lista_veterinarias' %}" class="btn btn-secondary">Volver</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
