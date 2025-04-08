@@ -27,17 +27,6 @@
                                 📍 <strong>Dirección:</strong> {{ vet.direccion|default:"No disponible" }}<br>
                                 📞 <strong>Teléfono:</strong> {{ vet.telefono|default:"No disponible" }}<br>
                                 🕒 <strong>Horario:</strong> {{ vet.horario|default:"-" }}<br>
-                                🧰 <strong>Servicios:</strong>
-                                {% if vet.get_servicios_display %}
-                                    <ul class="mb-0 ps-3 small">
-                                        {% for servicio in vet.get_servicios_display %}
-                                            <li>{{ servicio }}</li>
-                                        {% endfor %}
-                                    </ul>
-                                {% else %}
-                                    <span class="text-muted small">Sin servicios registrados</span>
-                                {% endif %}
-                                <br>
                                 🚨 <strong>Emergencias:</strong>
                                 {% if vet.admite_emergencias %}
                                     <span class="badge bg-success">Sí</span>
