@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Veterinaria
-from .forms import VeterinariaForm  # Crearemos este formulario más adelante
+from .forms import VeterinariaForm 
 
 def home(request):
     veterinarias = Veterinaria.objects.all()  # Obtiene todas las veterinarias

@@ -19,7 +19,6 @@
     display: inline-block;
     padding: 10px 20px;
     background-color: #1a4d8f;
-    margin-top: 10px;
     color: white;
     text-decoration: none;
     border-radius: 6px;
@@ -94,4 +93,39 @@ form textarea:focus {
 
 .card p {
     font-size: 1.1rem;
+}
+
+/* Formulario */
+.checkbox-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.checkbox-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #f8f9fa;
+    border: 2px solid #dee2e6;
+    border-radius: 10px;
+    padding: 10px 15px;
+    min-width: 220px;
+    font-weight: 500;
+    transition: all 0.2s ease-in-out;
+}
+
+.checkbox-item input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: #003366;
+}
+
+.form-check-input {
+    margin-right: 8px;
+    accent-color: #003366;
+}
+
+.form-check-label {
+    font-weight: 500;
 }

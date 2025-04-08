@@ -9,20 +9,39 @@
             <div class="card shadow p-4">
                 <h3 class="mb-4 text-center text-primary">Registrar / Editar Veterinaria</h3>
 
-                <<form id="form-vet" method="POST" novalidate>
+                <form id="form-vet" method="POST" novalidate>
                     {% csrf_token %}
+
                     {% for field in form %}
-                        <div class="mb-3">
-                            <label class="form-label">{{ field.label }}</label>
-                            {{ field }}
-                            {% if field.errors %}
-                                <div class="text-danger small">
-                                    {{ field.errors|striptags }}
-                                </div>
-                            {% endif %}
-                        </div>
+                        {% if field.name != 'servicios' %}
+                            <div class="mb-3">
+                                <label class="form-label">{{ field.label }}</label>
+                                {{ field }}
+                                {% if field.errors %}
+                                    <div class="text-danger small">
+                                        {{ field.errors|striptags }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        {% endif %}
                     {% endfor %}
-                    
+
+                    <div class="mb-4">
+                        <label class="form-label">Servicios disponibles:</label>
+                        <div class="row">
+                            {% for val, label in form.fields.servicios.choices %}
+                                <div class="col-6 mb-2">
+                                    <label class="form-check-label">
+                                        <input type="checkbox" name="servicios" value="{{ val }}"
+                                            {% if val in form.initial.servicios %}checked{% endif %}
+                                            class="form-check-input">
+                                        {{ label }}
+                                    </label>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+
                     <div class="d-flex justify-content-between">
                         <a href="{% url 'lista_veterinarias' %}" class="btn btn-secondary">Cancelar</a>
                         <button type="submit" class="btn btn-primary">Guardar</button>
