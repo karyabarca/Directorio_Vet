@@ -3,30 +3,60 @@
 {% block title %}Listado de Veterinarias{% endblock %}
 
 {% block content %}
-<div class="container mt-4">
-    <h2 class="mb-4 text-center">Listado de Veterinarias</h2>
+<div class="container mt-5">
+    <h2 class="mb-4 text-center">Listado de Veterinarias 🐶🐱</h2>
 
+    <!-- Buscador -->
+    <form method="GET" class="mb-4">
+        <div class="input-group">
+            <input type="text" name="q" value="{{ request.GET.q|default_if_none:'' }}" class="form-control" placeholder="Buscar veterinaria por nombre">
+            <button class="btn btn-primary" type="submit">Buscar</button>
+        </div>
+    </form>
+    
+
+    <!-- Resultados -->
     {% if veterinarias %}
         <div class="row g-4">
             {% for vet in veterinarias %}
                 <div class="col-md-6 col-lg-4">
-                    <div class="card h-100 shadow-sm">
+                    <div class="card h-100 shadow-sm border-0">
                         <div class="card-body">
-                            <h5 class="card-title">{{ vet.nombre }}</h5>
+                            <h5 class="card-title text-primary fw-bold">{{ vet.nombre }}</h5>
                             <p class="card-text">
-                                📍 {{ vet.direccion }}<br>
-                                📞 {{ vet.telefono }}
+                                📍 <strong>Dirección:</strong> {{ vet.direccion|default:"No disponible" }}<br>
+                                📞 <strong>Teléfono:</strong> {{ vet.telefono|default:"No disponible" }}<br>
+                                🕒 <strong>Horario:</strong> {{ vet.horario|default:"-" }}<br>
+                                🧰 <strong>Servicios:</strong>
+                                {% if vet.get_servicios_display %}
+                                    <ul class="mb-0 ps-3 small">
+                                        {% for servicio in vet.get_servicios_display %}
+                                            <li>{{ servicio }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                {% else %}
+                                    <span class="text-muted small">Sin servicios registrados</span>
+                                {% endif %}
+                                <br>
+                                🚨 <strong>Emergencias:</strong>
+                                {% if vet.admite_emergencias %}
+                                    <span class="badge bg-success">Sí</span>
+                                {% else %}
+                                    <span class="badge bg-secondary">No</span>
+                                {% endif %}
                             </p>
-                            <a href="{% url 'detalle_veterinaria' vet.pk %}" class="btn btn-outline-primary btn-sm">Ver detalles</a>
-                            <a href="{% url 'editar_veterinaria' vet.pk %}" class="btn btn-outline-warning btn-sm">Editar</a>
-                            <a href="{% url 'eliminar_veterinaria' vet.pk %}" class="btn btn-outline-danger btn-sm">Eliminar</a>
+                            <div class="d-flex justify-content-between mt-3">
+                                <a href="{% url 'detalle_veterinaria' vet.pk %}" class="btn btn-outline-primary btn-sm">Ver detalles</a>
+                                <a href="{% url 'editar_veterinaria' vet.pk %}" class="btn btn-outline-warning btn-sm">Editar</a>
+                                <a href="{% url 'eliminar_veterinaria' vet.pk %}" class="btn btn-outline-danger btn-sm">Eliminar</a>
+                            </div>
                         </div>
                     </div>
                 </div>
             {% endfor %}
         </div>
     {% else %}
-        <p class="text-center">No hay veterinarias registradas aún.</p>
+        <div class="alert alert-info text-center mt-4">No hay veterinarias registradas aún.</div>
     {% endif %}
 </div>
 {% endblock %}

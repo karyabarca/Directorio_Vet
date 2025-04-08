@@ -41,10 +41,30 @@
     </div>
 
     
-    <div class="text-center mt-4 ">
-        <a class= "btn-ver-listado" href="{% url 'lista_veterinarias' %}" class="btn btn-primary btn-lg mt-4">Ver listado de veterinarias</a>
 
-    </div>
     
+    <hr class="my-5">
+
+<h3 class="text-center text-primary mb-4">Veterinarias registradas</h3>
+<div class="row">
+    {% for vet in veterinarias %}
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">{{ vet.nombre }}</h5>
+                    <p class="card-text">{{ vet.direccion }}</p>
+                    <p class="card-text"><strong>Tel:</strong> {{ vet.telefono }}</p>
+                    <a href="{% url 'detalle_veterinaria' vet.pk %}" class="btn btn-outline-primary btn-sm">Ver detalles</a>
+                </div>
+            </div>
+        </div>
+    {% empty %}
+        <p class="text-center">No hay veterinarias registradas aún.</p>
+    {% endfor %}
+</div>
+<div class="text-center mt-4 ">
+    <a class= "btn-ver-listado" href="{% url 'lista_veterinarias' %}" class="btn btn-primary btn-lg mt-4">Ver el  listado completo</a>
+
+</div>
 </section>
 {% endblock %}

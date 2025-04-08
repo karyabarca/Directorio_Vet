@@ -42,3 +42,10 @@ def eliminar_veterinaria(request, pk):
         return redirect('lista_veterinarias')
     return render(request, 'veterinarias/confirmar_eliminar.html', {'veterinaria': veterinaria})
 
+def lista_veterinarias(request):
+    query = request.GET.get('q')
+    if query:
+        veterinarias = Veterinaria.objects.filter(nombre__icontains=query)
+    else:
+        veterinarias = Veterinaria.objects.all()
+    return render(request, 'veterinarias/lista.html', {'veterinarias': veterinarias, 'query': query})
