@@ -1,0 +1,73 @@
+{% extends 'veterinarias/base.html' %}
+
+{% block title %}Listado de Veterinarias{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4 text-center">Listado de Veterinarias 🐶🐱</h2>
+
+    <!-- Buscador -->
+    <form method="GET" class="mb-4">
+        <div class="input-group">
+            <input type="text" name="q" value="{{ request.GET.q|default_if_none:'' }}" class="form-control" placeholder="Buscar veterinaria por nombre">
+            <button class="btn btn-primary" type="submit">Buscar</button>
+        </div>
+    </form>
+
+    {% if veterinarias %}
+        <!-- Contenedor con scroll vertical -->
+        <div class="vertical-scroll-container mx-auto shadow-sm rounded" style="max-height: 600px; overflow-y: auto; padding: 1rem;">
+            {% for vet in veterinarias %}
+                <div class="card mb-2 shadow-sm text-center small-card">
+                    <div class="card-body p-2">
+                        <h6 class="card-title text-primary fw-bold mb-2">{{ vet.nombre }}</h6>
+                        <p class="card-text mb-1" style="font-size: 0.85rem;">
+                            📍 <strong>Dirección:</strong><br> {{ vet.direccion|default:"No disponible" }}<br>
+                            📞 <strong>Teléfono:</strong><br> {{ vet.telefono|default:"No disponible" }}<br>
+                            🕒 <strong>Horario:</strong><br>
+                            {{ vet.get_apertura_display }} - {{ vet.get_cierre_display }}<br>
+                                                        🚨 <strong>Emergencias:</strong>
+                            {% if vet.admite_emergencias %}
+                                <span class="badge bg-success">Sí</span>
+                            {% else %}
+                                <span class="badge bg-secondary">No</span>
+                            {% endif %}
+                        </p>
+                        <div class="d-flex justify-content-center gap-1 mt-2 flex-wrap">
+                            <a href="{% url 'detalle_veterinaria' vet.pk %}" class="btn btn-outline-primary btn-sm">Ver</a>
+                            <a href="{% url 'editar_veterinaria' vet.pk %}" class="btn btn-outline-warning btn-sm">Editar</a>
+                            <a href="{% url 'eliminar_veterinaria' vet.pk %}" class="btn btn-outline-danger btn-sm">Eliminar</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="alert alert-info text-center mt-4">No hay veterinarias registradas aún.</div>
+    {% endif %}
+</div>
+
+<style>
+.vertical-scroll-container {
+    background-color: #f8f9fa;
+    scrollbar-width: thin;
+    scrollbar-color: #007bff #e0e0e0;
+    border: 1px solid #dee2e6;
+}
+
+.vertical-scroll-container::-webkit-scrollbar {
+    width: 8px;
+}
+.vertical-scroll-container::-webkit-scrollbar-thumb {
+    background-color: #007bff;
+    border-radius: 10px;
+}
+
+.small-card {
+    padding: 0.25rem;
+    font-size: 0.9rem;
+    max-width: 500px;
+    margin: 0 auto;
+}
+</style>
+{% endblock %}

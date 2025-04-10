@@ -1,0 +1,101 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Directorio Vet{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'veterinarias/css/styles.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+
+</head>
+<header>
+    <nav class="navbar navbar-expand-lg custom-navbar px-4">
+        <a class="navbar-brand fw-bold text-white" href="{% url 'home' %}">
+            🐾 DirectorioVet
+        </a>
+        <button class="navbar-toggler text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarVet" aria-controls="navbarVet" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    
+        <div class="collapse navbar-collapse" id="navbarVet">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="{% url 'home' %}">Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="{% url 'lista_veterinarias' %}">Veterinarias</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="{% url 'crear_veterinaria' %}">Agregar</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    
+</header>
+
+
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <hr>
+        <p>&copy; 2025 DirectorioVet</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const form = document.getElementById('form-vet');
+            if (form) {
+                form.addEventListener('submit', function (event) {
+                    let isValid = true;
+                    const inputs = form.querySelectorAll('input, textarea');
+        
+                    inputs.forEach(input => {
+                        const errorDiv = input.nextElementSibling;
+                        if (errorDiv && errorDiv.classList.contains('text-danger')) {
+                            errorDiv.remove(); // Borra errores anteriores
+                        }
+        
+                        if (input.required && input.value.trim() === '') {
+                            isValid = false;
+                            showError(input, 'Este campo es obligatorio.');
+                        }
+        
+                        if (input.type === 'email' && input.value.trim() !== '') {
+                            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                            if (!emailRegex.test(input.value.trim())) {
+                                isValid = false;
+                                showError(input, 'Correo electrónico inválido.');
+                            }
+                        }
+        
+                        if (input.name.includes('telefono') && input.value.trim() !== '') {
+                            const phoneRegex = /^[0-9+\-\s()]+$/;
+                            if (!phoneRegex.test(input.value.trim())) {
+                                isValid = false;
+                                showError(input, 'Teléfono inválido.');
+                            }
+                        }
+                    });
+        
+                    if (!isValid) {
+                        event.preventDefault(); // Evita enviar si hay errores
+                    }
+                });
+        
+                function showError(input, message) {
+                    const error = document.createElement('div');
+                    error.classList.add('text-danger', 'small', 'mt-1');
+                    error.innerText = message;
+                    input.parentNode.appendChild(error);
+                }
+            }
+        });
+        </script>
+        
+</body>
+</html>

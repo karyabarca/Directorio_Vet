@@ -1,0 +1,12 @@
+from django import forms
+from .models import Veterinaria
+
+class VeterinariaForm(forms.ModelForm):
+    class Meta:
+        model = Veterinaria
+        fields = '__all__'
+        widgets = {
+            'servicios': forms.CheckboxSelectMultiple(),
+            'apertura': forms.Select(),
+            'cierre': forms.Select(),
+        }

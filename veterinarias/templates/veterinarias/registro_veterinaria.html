@@ -1,0 +1,43 @@
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <h4>Horarios de atención:</h4>
+    <div id="horarios">
+        <div class="horario">
+            <select name="dia">
+                <option value="LUN">Lunes</option>
+                <option value="MAR">Martes</option>
+                <option value="MIE">Miércoles</option>
+                <option value="JUE">Jueves</option>
+                <option value="VIE">Viernes</option>
+                <option value="SAB">Sábado</option>
+                <option value="DOM">Domingo</option>
+            </select>
+            <input type="time" name="hora_apertura">
+            <input type="time" name="hora_cierre">
+            <button type="button" onclick="eliminarHorario(this)">🗑️</button>
+        </div>
+    </div>
+    <button type="button" onclick="agregarHorario()">+ Agregar otro horario</button>
+    <br><br>
+    <button type="submit">Guardar</button>
+</form>
+
+<script>
+function agregarHorario() {
+    const contenedor = document.getElementById('horarios');
+    const horario = contenedor.firstElementChild.cloneNode(true);
+    horario.querySelectorAll('input').forEach(input => input.value = '');
+    contenedor.appendChild(horario);
+}
+
+function eliminarHorario(btn) {
+    const contenedor = document.getElementById('horarios');
+    if (contenedor.children.length > 1) {
+        btn.parentElement.remove();
+    } else {
+        alert("Debe haber al menos un horario.");
+    }
+}
+</script>

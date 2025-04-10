@@ -1,0 +1,73 @@
+{% extends 'veterinarias/base.html' %}
+{% load static %}
+
+{% block title %}Inicio | Directorio Vet{% endblock %}
+
+{% block content %}
+
+<section class="inicio">
+    <div class="text-center">
+        <div>
+            <img src="{% static 'veterinarias/images/veterinaria.jpg' %}" 
+                 class="img-fluid rounded-3 shadow-sm" alt="Imagen de veterinaria">
+        </div>
+    </div>
+
+    <h2 class="my-4 text-primary font-weight-bold">Bienvenido al Directorio de Veterinarias 🐾</h2>
+    <p class="lead text-center text-muted mb-4">
+        Este directorio te ayuda a encontrar, registrar y administrar clínicas veterinarias de forma rápida y eficiente. ¡Tu mascota merece lo mejor! 🐶🐱
+    </p>
+    
+    <div class="row text-center mt-5">
+        <div class="col-md-4 mb-4">
+            <div class="card border-0 shadow-lg rounded-3">
+                <div class="card-body">
+                    <h5 class="card-title text-primary">🔍 Buscar veterinarias</h5>
+                    <p class="card-text">Consulta rápidamente clínicas por nombre, ubicación o especialidad.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card border-0 shadow-lg rounded-3">
+                <div class="card-body">
+                    <h5 class="card-title text-primary">📋 Administra tu directorio</h5>
+                    <p class="card-text">Agrega, edita y elimina veterinarias en un solo lugar, de forma sencilla.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card border-0 shadow-lg rounded-3">
+                <div class="card-body">
+                    <h5 class="card-title text-primary">💙 Pensado para ti</h5>
+                    <p class="card-text">Un diseño simple, rápido y accesible para facilitar tu experiencia.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr class="my-5">
+
+    <h3 class="text-center text-primary mb-4">Veterinarias registradas</h3>
+    <div class="row">
+        {% for vet in veterinarias %}
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm border-0 rounded-3">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ vet.nombre }}</h5>
+                        <p class="card-text">{{ vet.direccion }}</p>
+                        <p class="card-text"><strong>Tel:</strong> {{ vet.telefono }}</p>
+                        <a href="{% url 'detalle_veterinaria' vet.pk %}" class="btn btn-outline-primary btn-sm">Ver detalles</a>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <p class="text-center">No hay veterinarias registradas aún.</p>
+        {% endfor %}
+    </div>
+    
+    <div class="text-center mt-4">
+        <a href="{% url 'lista_veterinarias' %}" class="btn btn-primary btn-lg mt-4">Ver el listado completo</a>
+    </div>
+</section>
+
+{% endblock %}
